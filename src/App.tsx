@@ -4,9 +4,12 @@ import Card from './components/Card';
 
 function App() {
   return (
-    <div>
+    <div className='bg-light-grayish-cyan-bg min-h-screen'>
       <Header />
-      <Card />
+      <div className=' mt-12 mb-8 px-6'>
+        <Card />
+      </div>
+
     </div>
   );
 }
