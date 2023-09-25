@@ -1,6 +1,7 @@
 import React from 'react'
 
 type CardProps = {
+    id: number
     company: string
     logo: string
     new: boolean
@@ -13,9 +14,15 @@ type CardProps = {
     location: string,
     languages: string[],
     tools: string[]
+    onFilterClick: (filterValue: string) => void
 }
 
 const Card = (props: CardProps) => {
+
+    function handleFilterClick(value: string) {
+        props.onFilterClick(value)
+    }
+
     return (
         <div className='bg-white relative border-l-4 border-desaturated-dark-cyan px-6 pt-10 pb-6 rounded mt-16 shadow-desaturated-dark-cyan shadow-custom'>
             <img
@@ -43,13 +50,13 @@ const Card = (props: CardProps) => {
             <hr className='mt-3 bg-very-dark-grayish-cyan border' />
 
             <div className='flex mt-4 gap-4 flex-wrap'>
-                <div className="bg-light-grayish-cyan-bg text-desaturated-dark-cyan font-bold px-3 py-1">{props.role}</div>
-                <div className="bg-light-grayish-cyan-bg text-desaturated-dark-cyan font-bold px-3 py-1">{props.level}</div>
-                {props.tools.map((tool) => (
-                    <div className="bg-light-grayish-cyan-bg text-desaturated-dark-cyan font-bold px-3 py-1">{tool}</div>
+                <div className="bg-light-grayish-cyan-bg text-desaturated-dark-cyan font-bold px-3 py-1 cursor-pointer" onClick={() => handleFilterClick(props.role)}>{props.role}</div>
+                <div className="bg-light-grayish-cyan-bg text-desaturated-dark-cyan font-bold px-3 py-1 cursor-pointer" onClick={() => handleFilterClick(props.level)}>{props.level}</div>
+                {props.tools.map((tool, index) => (
+                    <div key={index} className="bg-light-grayish-cyan-bg text-desaturated-dark-cyan font-bold px-3 py-1 cursor-pointer" onClick={() => handleFilterClick(tool)}>{tool}</div>
                 ))}
-                {props.languages.map((language) => (
-                    <div className="bg-light-grayish-cyan-bg text-desaturated-dark-cyan font-bold px-3 py-1">{language}</div>
+                {props.languages.map((language, index) => (
+                    <div key={index} className="bg-light-grayish-cyan-bg text-desaturated-dark-cyan font-bold px-3 py-1 cursor-pointer" onClick={() => handleFilterClick(language)}>{language}</div>
                 ))}
 
             </div>
