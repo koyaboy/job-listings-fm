@@ -33,9 +33,22 @@ function App() {
     <div className='bg-light-grayish-cyan-bg min-h-screen'>
       <Header />
 
-      <div className='mb-8 px-6'>
-        {selectedFilters ?
 
+      {selectedFilters &&
+        <div className='relative -top-8 bg-white flex flex-wrap gap-4 p-5 mx-6'>
+          {selectedFilters.map((filter) => (
+            <div className='flex gap-2 items-center bg-light-grayish-cyan-bg'>
+              <div className='text-desaturated-dark-cyan px-2 py-2'>{filter}</div>
+              <div className='bg-desaturated-dark-cyan flex items-center self-stretch p-2'>
+                <img src="./images/icon-remove.svg" alt="icon-remove" />
+              </div>
+            </div>
+          ))}
+        </div>
+      }
+
+      <div className='mb-8 px-6'>
+        {selectedFilters ? (
           filteredData.map((item) => (
             <Card
               id={item.id}
@@ -53,6 +66,7 @@ function App() {
               tools={item.tools}
               onFilterClick={handleFilter}
             />
+          )
           ))
           :
           data.map((item) => (
