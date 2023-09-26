@@ -24,7 +24,7 @@ const Card = (props: CardProps) => {
     }
 
     return (
-        <div className='bg-white relative border-l-4 border-desaturated-dark-cyan px-6 pt-10 pb-6 rounded mt-16 shadow-desaturated-dark-cyan shadow-custom lg:flex lg:items-center lg:justify-between'>
+        <div className={`bg-white relative ${props.featured && 'border-l-4'} border-desaturated-dark-cyan px-6 pt-10 pb-6 rounded mt-16 shadow-desaturated-dark-cyan shadow-custom lg:flex lg:items-center lg:justify-between`}>
             <div className='lg:flex lg:gap-4'>
                 <img
                     src={props.logo}
