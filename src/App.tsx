@@ -7,7 +7,7 @@ import data from "./data.json"
 
 function App() {
 
-  const [selectedFilters, setSelectedFilters] = useState<string[]>()
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([])
 
   const handleFilter = (value: string) => {
     if (selectedFilters == undefined) {
@@ -27,7 +27,7 @@ function App() {
     })
   })
 
-  console.log(selectedFilters)
+  // console.log(selectedFilters)
 
   return (
     <div className='bg-light-grayish-cyan-bg min-h-screen'>
@@ -35,15 +35,15 @@ function App() {
 
 
       {/* FILTER BODY */}
-      {selectedFilters &&
-        <div className='relative -top-8 bg-white  p-5 mx-6'>
+      {selectedFilters.length !== 0 &&
+        <div className='relative -top-10 bg-white p-5 mx-6 md:mx-12 lg:mx-20 xl:mx-32'>
           <div className="w-[88%] flex flex-wrap gap-4">
             {selectedFilters.map((filter) => (
 
               <div className='flex gap-2 items-center bg-light-grayish-cyan-bg'>
                 <div className='text-desaturated-dark-cyan px-2 py-2'>{filter}</div>
                 <div
-                  className='bg-desaturated-dark-cyan flex items-center self-stretch p-2 cursor-pointer'
+                  className='bg-desaturated-dark-cyan flex items-center self-stretch p-2 cursor-pointer hover:bg-very-dark-grayish-cyan'
                   onClick={() => setSelectedFilters((prevFilters) => prevFilters?.filter((element) => element !== filter))}
                 >
                   <img src="./images/icon-remove.svg" alt="icon-remove" />
@@ -52,17 +52,17 @@ function App() {
 
             ))}
           </div>
+
           <div
-            className='absolute left-[86.5%] top-[40%] text-desaturated-dark-cyan cursor-pointer'
-            onClick={() => setSelectedFilters(undefined)}
+            className='absolute left-[86.5%] top-[40%] text-desaturated-dark-cyan cursor-pointer hover:underline lg:left-[92.5%]'
+            onClick={() => setSelectedFilters([])}
           >
             Clear
           </div>
         </div>
       }
 
-
-      <div className='mb-8 px-6'>
+      <div className='mb-20 px-6 md:px-12 lg:px-20 xl:px-32'>
         {selectedFilters ? (
           filteredData.map((item) => (
             <Card
