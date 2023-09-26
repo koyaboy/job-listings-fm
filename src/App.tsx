@@ -19,8 +19,6 @@ function App() {
     }
   }
 
-  console.log(selectedFilters)
-
   const filteredData = data.filter((item) => {
     return selectedFilters?.every((filter) => {
       return (
@@ -29,23 +27,40 @@ function App() {
     })
   })
 
+  console.log(selectedFilters)
+
   return (
     <div className='bg-light-grayish-cyan-bg min-h-screen'>
       <Header />
 
 
+      {/* FILTER BODY */}
       {selectedFilters &&
-        <div className='relative -top-8 bg-white flex flex-wrap gap-4 p-5 mx-6'>
-          {selectedFilters.map((filter) => (
-            <div className='flex gap-2 items-center bg-light-grayish-cyan-bg'>
-              <div className='text-desaturated-dark-cyan px-2 py-2'>{filter}</div>
-              <div className='bg-desaturated-dark-cyan flex items-center self-stretch p-2'>
-                <img src="./images/icon-remove.svg" alt="icon-remove" />
+        <div className='relative -top-8 bg-white  p-5 mx-6'>
+          <div className="w-[88%] flex flex-wrap gap-4">
+            {selectedFilters.map((filter) => (
+
+              <div className='flex gap-2 items-center bg-light-grayish-cyan-bg'>
+                <div className='text-desaturated-dark-cyan px-2 py-2'>{filter}</div>
+                <div
+                  className='bg-desaturated-dark-cyan flex items-center self-stretch p-2 cursor-pointer'
+                  onClick={() => setSelectedFilters((prevFilters) => prevFilters?.filter((element) => element !== filter))}
+                >
+                  <img src="./images/icon-remove.svg" alt="icon-remove" />
+                </div>
               </div>
-            </div>
-          ))}
+
+            ))}
+          </div>
+          <div
+            className='absolute left-[86.5%] top-[40%] text-desaturated-dark-cyan cursor-pointer'
+            onClick={() => setSelectedFilters(undefined)}
+          >
+            Clear
+          </div>
         </div>
       }
+
 
       <div className='mb-8 px-6'>
         {selectedFilters ? (
